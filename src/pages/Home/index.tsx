@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Animated,
-  PressableStateCallbackType,
-  SafeAreaView,
-} from "react-native";
+import { Animated, SafeAreaView } from "react-native";
 import * as Font from "expo-font";
 import { SplashScreen } from "../../components/global/SplashScreen";
 import * as S from "./styles";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../App";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -15,9 +13,11 @@ const fetchFonts = () => {
   });
 };
 
-export const Home = () => {
+export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [fontLoaded, setFontLoaded] = useState(false);
+
+  const { navigate } = useNavigation<NavigationProp<RootStackParamList>>();
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const buttonOpacity = useRef(new Animated.Value(1)).current;
@@ -76,14 +76,9 @@ export const Home = () => {
           <S.Text>Make yourself more on time</S.Text>
           <S.AnimatedViewButton style={{ opacity: buttonOpacity }}>
             <S.ButtonStart
-              // android_ripple={{
-              //   color: "rgba(42, 42, 46, .5)",
-              // }}
+              onPress={() => navigate("Schedule")}
               onPressIn={handlePressIn}
               onPressOut={handlePressOut}
-              // style={({ pressed }: PressableStateCallbackType) =>
-              //   pressed && { opacity: 0.8 }
-              // }
             >
               <S.TextButton>START</S.TextButton>
             </S.ButtonStart>
@@ -92,4 +87,4 @@ export const Home = () => {
       </SafeAreaView>
     </S.Container>
   );
-};
+}

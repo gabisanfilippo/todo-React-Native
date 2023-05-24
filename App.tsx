@@ -1,5 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { Home } from "./src/pages/Home";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Schedule from "./src/pages/Schedule";
+import Home from "./src/pages/Home";
+
+export type RootStackParamList = {
+  Home: undefined;
+  Schedule: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -9,7 +20,23 @@ export default function App() {
         style="auto"
         networkActivityIndicatorVisible={true}
       />
-      <Home />
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Schedule"
+            component={Schedule}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }
