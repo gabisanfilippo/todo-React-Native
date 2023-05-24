@@ -4,7 +4,11 @@ import { Home } from "./src/pages/Home";
 export default function App() {
   return (
     <>
-      <StatusBar animated={true} style="light" />
+      <StatusBar
+        animated={true}
+        style="auto"
+        networkActivityIndicatorVisible={true}
+      />
       <Home />
     </>
   );
