@@ -19,6 +19,7 @@ export default function App() {
         animated={true}
         style="auto"
         networkActivityIndicatorVisible={true}
+        hidden
       />
       <NavigationContainer>
         <Stack.Navigator
